@@ -1,0 +1,74 @@
+Go on firebase website, 
+Creater a new project
+Copy the link and paste to find libraries
+Copy link for firebase to html
+COpy library link below the above first link
+copy the var to the js 
+copy the firebase initializer to js
+go to develop, then real time database
+Start in test mode in website
+Never want to step down multiple steps
+Aim for 2-3 trees 
+
+$(document).ready(function () {
+    //Pasted from Firebase Site
+    const firebaseConfig = {
+        apiKey: "AIzaSyC1bZZnSti_N_lYOLANiP46dfZkHfe0ZAI",
+        authDomain: "fir-goodtime-becc.firebaseapp.com",
+        databaseURL: "https://fir-goodtime-becc.firebaseio.com",
+        projectId: "fir-goodtime-becc",
+        storageBucket: "fir-goodtime-becc.appspot.com",
+        messagingSenderId: "606609073730",
+        appId: "1:606609073730:web:a3f66575f738b10675afdb"
+    };
+    //Pasted from Firebase site
+    firebase.initializeApp(firebaseConfig);
+
+    //Create a variable to hold the database, in this case we will call it db
+    const db = firebase.database();
+
+    //we call the ref() on 'value' , which targets the value in firebase 
+    db.ref().on('value', snap => {    //('data') put inside the ref() would log just data object.
+        //When we log snap.val(), it will show in the console what we have in our database
+        //When we are on firebase site, and add/change name & value, it automatically updates
+        //We can also target the object if we type .data or .name or .whatever the value we choose in the log
+       console.log(snap.val());   //We get the value of 'name' in this log
+    })
+    /*
+    //creating something on firebase
+    db.ref('data').set({   //when we .set({})a data, it will create a data in firebase
+        data: [1,2,3,4],
+        names: ['Thomas', 'Smith', 'Williams'],
+        cars: ['Honda', 'Toyota' ,'Ferarri']
+    })
+
+    //Creating more objects through firebase
+    db.ref('bcs').set({     //ref('bcs') gives the object name as bcs
+        data: [1,2,3,4,5],
+        names: ['Ben', 'Ken', 'Henry']
+    })
+
+    */
+
+    db.ref('name-container').set({  //creating an object called name-container and the name is sarah n
+        name: 'Sarah n',
+    })
+
+    db.ref('game-container').set({
+        game: 'sorry',
+    })
+
+    db.ref('game-container').on('value', snap =>{
+        console.log(snap.val());
+        const text = snap.val();
+        $('.firebase').append(text)
+        
+        
+        
+    })
+
+
+    
+
+
+})
